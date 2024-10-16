@@ -6,9 +6,9 @@ from src.database.connection import get_connection
 from src.utils.Logger import Logger
 
 
-class Tipo_Insumos():
+class Catalogo_Tipo_Insumos():
     @classmethod
-    def tipo_insumo(cls, id_departamento):
+    def get_catalogo_tipo_insumo(cls, id_departamento):
         connection = None
         try:
             # Obtener conexión a la base de datos

@@ -139,7 +139,7 @@ class Base_CostosInsumosAlmacenService():
                 connection.close()
 
     @classmethod
-    def obtener_Catalogo_InsumosAlmacen(cls, id_tipo_insumo):
+    def get_Catalogo_InsumosAlmacen(cls, id_tipo_insumo):
         connection = None
         try:
             # Obtener conexión a la base de datos

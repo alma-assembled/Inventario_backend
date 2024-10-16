@@ -1,14 +1,14 @@
 from marshmallow import Schema, fields, post_load
 
 class BaseCostosInsumosAlmacenSchema(Schema):
-    id_bcostoinsumo = fields.Int(required=True)   # Campo entero obligatorio
-    fecha = fields.Date(required=True)            # Campo de fecha obligatorio
-    costo_unidad = fields.Float(required=True)    # Campo de costo por unidad (flotante)
-    cantidad_almacen = fields.Int(required=True)  # Cantidad en almacén
-    cantidad_inventario = fields.Int(required=True) # Cantidad en inventario
-    uuid = fields.Str(required=True)              # Identificador UUID (cadena de texto)
-    id_cinsumoalmacen = fields.Int(required=True) # ID de insumo de almacén
-    id_bfacturacxp = fields.Int(required=True)    # ID de la factura
+    id_bcostoinsumo = fields.Int(required=False)   
+    fecha = fields.Date(required=True)            
+    costo_unidad = fields.Float(required=True) 
+    cantidad_almacen = fields.Decimal(required=True) 
+    cantidad_inventario = fields.Decimal(required=True) 
+    uuid = fields.Str(required=False) 
+    id_cinsumoalmacen = fields.Int(required=True) 
+    id_bfacturacxp = fields.Int(required=False)
 
     @post_load
     def make_base_costos_insumos_almacen(self, data, **kwargs):

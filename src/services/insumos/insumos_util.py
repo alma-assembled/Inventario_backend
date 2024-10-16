@@ -44,7 +44,6 @@ class Insumos_util():
             if connection:
                 connection.close()
 
-    
     @classmethod
     def cantidad_disponible_insumos(cls, id_insumos_almacen):
         connection = None
@@ -95,7 +94,6 @@ class Insumos_util():
         finally:
             if connection:
                 connection.close()
-
 
     @classmethod
     def insumo_por_nombre(cls, insumo):
@@ -163,7 +161,6 @@ class Insumos_util():
         finally:
             if connection:
                 connection.close()
-
 
     @classmethod
     def costos_insumos_almacen_por_id(cls, id):

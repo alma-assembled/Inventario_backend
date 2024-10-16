@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields, post_load
 
 class BaseInsumosProduccionSchema(Schema):
-    id_binsumoproduccion = fields.Int(required=True) 
+    id_binsumoproduccion = fields.Int(required=False) 
     fecha = fields.Date(required=True) 
     costo = fields.Float(required=True)  
     id_bop = fields.Int(required=True) 

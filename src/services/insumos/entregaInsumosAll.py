@@ -5,7 +5,7 @@ from src.database.connection import get_connection
 # Logger
 from src.utils.Logger import Logger
 
-class InsumosModel:
+class EntregaInsumos:
 
     @classmethod
     def get_entrega_insumos_all(cls, id_tipo_inventario):
@@ -69,7 +69,6 @@ class InsumosModel:
         finally:
             if connection:
                 connection.close()
-
 
     @classmethod
     def filtro_entregados(cls, consulta):

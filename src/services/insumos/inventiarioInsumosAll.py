@@ -5,7 +5,7 @@ from src.database.connection import get_connection
 # Logger
 from src.utils.Logger import Logger
 
-class InsumosModel:
+class InventarioInsumosAll:
 
     @classmethod
     def get_inventario_por_tipo(cls, id_tipo_inventario):

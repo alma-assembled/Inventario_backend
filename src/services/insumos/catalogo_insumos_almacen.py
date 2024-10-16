@@ -8,7 +8,7 @@ from src.schemas.catalogo_insumos_almacen import CatalogoInsumosAlmacenSchema
 
 class Catalogo_InsumosAlmacenService():
     @classmethod
-    def post_add_Catalogo_InsumosAlmacen(insumo_data):
+    def save_Catalogo_InsumosAlmacen(insumo_data):
         connection = None
         try:
             # Obtener conexión a la base de datos

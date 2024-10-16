@@ -13,7 +13,7 @@ main = Blueprint('index_blueprint', __name__)
 def index():
     try:
         Logger.add_to_log("info", "{} {}".format(request.method, request.path))
-        return "Inventario Backend"
+        return "Inventario Backend : ok"
     except Exception as ex:
         Logger.add_to_log("error", str(ex))
         Logger.add_to_log("error", traceback.format_exc())
