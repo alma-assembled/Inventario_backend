@@ -1,12 +1,30 @@
 from flask import Flask
 from flask_cors import CORS
-
+from flasgger import Swagger
 # Routes
 from .routes import  IndexRoutes, AuthRoutes
 from .routes.insumos import  base_costos_insumos_almacenRoutes, base_InsumosProduccionRoutes
 from .routes.insumos import  catalogo_insumos_almacenRoutes, entregaInsumosAll, inventiarioInsumosAllRoutes
 
 app = Flask(__name__)
+
+# Configuración de Swagger
+swagger_config = {
+    "headers": [],
+    "specs": [
+        {
+            "endpoint": 'apispec',
+            "route": '/apispec.json',
+            "rule_filter": lambda rule: True,  # Incluir todas las rutas
+            "model_filter": lambda tag: True,  # Incluir todos los modelos
+        }
+    ],
+    "static_url_path": "/flasgger_static",
+    "swagger_ui": True,  # Habilita la interfaz Swagger UI
+    "specs_route": "/apidocs/"  # Ruta donde estará la documentación
+}
+
+swagger = Swagger(app,swagger_config)
 #CORS(app, resources={r"/empleados/*": {"origins": "http://localhost:3000"}})
 CORS(app)
 def init_app(config):

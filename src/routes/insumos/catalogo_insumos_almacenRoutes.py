@@ -56,16 +56,17 @@ def post_insert_insumos_almacen():
     
     except Exception as ex:
         Logger.add_to_log("er:", f"Error in POST /: {str(ex)}")
+        print(str(ex))
         return create_response(message="ERROR", success=False, status_code=500)
 
 
-@main.route('/tipo_insumo/<int:id_departamento>', methods=['GET'])
-def get_tipo_insumos_almacen(id_departamento):
+@main.route('/tipo_insumo/', methods=['GET'])
+def get_tipo_insumos_almacen():
     has_access = Security.verify_token(request.headers)
 
     if has_access:
         try:
-            insumos_almacen = Catalogo_Tipo_Insumos.get_catalogo_tipo_insumo(id_departamento)
+            insumos_almacen = Catalogo_Tipo_Insumos.get_catalogo_tipo_insumo()
             
             if insumos_almacen:
                 return create_response(data=insumos_almacen)

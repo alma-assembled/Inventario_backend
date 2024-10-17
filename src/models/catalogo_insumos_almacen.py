@@ -1,8 +1,8 @@
 class CatalogoInsumosAlmacenModel:
-    def __init__(self, id_cinsumoalmacen=None, insumo=None, medida_unidad=None, id_tipo_inventario=None):
+    def __init__(self, id_cinsumoalmacen=None, insumo=None, unidad_de_medida=None, id_tipo_inventario=None):
         self.id_cinsumoalmacen = id_cinsumoalmacen
         self.insumo = insumo
-        self.medida_unidad = medida_unidad
+        self.unidad_de_medida = unidad_de_medida
         self.id_tipo_inventario = id_tipo_inventario
 
     def serialize(self):

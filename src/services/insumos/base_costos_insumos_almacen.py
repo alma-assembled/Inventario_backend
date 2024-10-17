@@ -187,3 +187,60 @@ class Base_CostosInsumosAlmacenService():
         finally:
             if connection:
                 connection.close()
+
+
+    @classmethod
+    def get_List_CostosInsumosAlmacen(cls, id_tipo_insumo):
+        connection = None
+        try:
+            # Obtener conexión a la base de datos
+            connection = get_connection()
+            insumos = []
+
+            # Definir la consulta SQL con parámetros seguros
+            query = '''
+                SELECT  ID_BCOSTOINSUMO, CANTIDAD_INVENTARIO 
+                FROM OPS.Base_CostosInsumosAlmacen 
+                WHERE ACTIVO = 1 AND CANTIDAD_INVENTARIO > 0 
+                AND ID_CINSUMOALMACEN = %s ORDER BY FECHA;
+            '''
+
+            # Ejecutar la consulta
+            with connection.cursor() as cursor:
+                cursor.execute(query, (id_tipo_insumo,))
+                resultset = cursor.fetchall()
+                insumos = resultset
+                # Procesar cada fila del resultado
+                #for row in resultset:
+                #    insumo = {
+                #        'ID_BCOSTOINSUMO': row[0],
+                #        'CANTIDAD_INVENTARIO': row[1]
+                #    }
+                #    insumos.append(insumo)
+            return  insumos
+
+        except Exception as ex:
+            Logger.add_to_log("error", f"Error al obtener insumos del almacén: {str(ex)}")
+            Logger.add_to_log("error", traceback.format_exc())
+            return []
+
+        finally:
+            if connection:
+                connection.close()
+
+    @classmethod
+    def asignar_productos_op(cls, costos_data):
+        list_costos_almacen =   Base_CostosInsumosAlmacenService.get_List_CostosInsumosAlmacen(costos_data.id_insumo)
+        cantidad_suministrar = costos_data.cantidad 
+        for insumo_costo_almacen in list_costos_almacen:
+            id_costo_insumo =  insumo_costo_almacen[0]
+            cantidad_inventario = insumo_costo_almacen[1]
+            
+            if cantidad_suministrar <= cantidad_inventario :
+                cantidad_inventario -= cantidad_suministrar 
+                Base_CostosInsumosAlmacenService.update_costos_insumos_almacen_cantidad(cantidad_inventario,id_costo_insumo)
+                print("cantidad sera sumistrada en una sola exibicion")
+            else : 
+                Base_CostosInsumosAlmacenService.update_costos_insumos_almacen_cantidad(0,id_costo_insumo)
+                cantidad_suministrar  -= cantidad_inventario 
+                print("varias exibiciones")

@@ -8,7 +8,7 @@ from src.utils.Logger import Logger
 
 class Catalogo_Tipo_Insumos():
     @classmethod
-    def get_catalogo_tipo_insumo(cls, id_departamento):
+    def get_catalogo_tipo_insumo(cls):
         connection = None
         try:
             # Obtener conexión a la base de datos
@@ -24,14 +24,13 @@ class Catalogo_Tipo_Insumos():
                     OPS.Catalogo_Tipo_Insumo 
                 WHERE 
                     ACTIVO = TRUE 
-                    AND ID_RHCDEPARTAMENTO = %s 
                 ORDER BY 
                     DESCRIPCION DESC;
             '''
 
             # Ejecutar la consulta
             with connection.cursor() as cursor:
-                cursor.execute(query, (id_departamento,))
+                cursor.execute(query)
                 resultset = cursor.fetchall()
 
                 # Procesar cada fila del resultado
